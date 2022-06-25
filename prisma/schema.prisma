@@ -1,0 +1,74 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+
+model user{
+  id Int @id @default(autoincrement())
+  username String @db.VarChar(45) @unique
+  email String @db.VarChar(45) @unique
+  password String @db.VarChar(45)
+  first_name String @db.VarChar(45)
+  last_name String @db.VarChar(45)
+  created_at DateTime @db.Timestamp() @default(now())
+  updated_ad DateTime @db.Timestamp() @default(now())
+  userAddress user_address?
+  image_id Int @default(1)
+  image image @relation(fields: [image_id],references: [id],onDelete: SetDefault,onUpdate: Cascade)
+  city_id Int
+  city city @relation(fields: [city_id],references: [id],onDelete: SetNull,onUpdate: Cascade)
+}
+
+model user_address{
+  id Int @id @default(autoincrement())
+  address_line1 String? @db.Text
+  address_line2 String? @db.Text
+  postal_code String? @db.VarChar(45)
+  telephone1 String? @db.VarChar(17)
+  telephone2 String? @db.VarChar(17)
+  user_id Int
+  user user @relation(fields: [user_id],references: [id],onDelete: Cascade,onUpdate: Cascade) 
+}
+
+model country{
+  id Int @id @default(autoincrement())
+  name String @db.VarChar(255)
+  short String @db.VarChar(7)
+  telephone_code String @db.Char(7)
+  image_id Int @default(1)
+  image image @relation(fields: [image_id],references: [id],onDelete: NoAction,onUpdate: Cascade)
+  city city[]
+}
+
+model city{
+  id Int @id @default(autoincrement())
+  name String @db.VarChar(255)
+  country_id Int
+  country country @relation(fields: [country_id],references: [id],onDelete: Cascade,onUpdate: Cascade)
+  user user[]
+}
+
+model session{
+  id Int @id @default(autoincrement())
+  total Decimal @default(1)
+  created_at DateTime @db.Timestamp() @default(now())
+  updated_ad DateTime @db.Timestamp() @default(now())
+  user_id Int
+  
+}
+
+model image{
+  id Int @id @default(autoincrement())
+  src String @db.VarChar(255)
+  alt String @db.VarChar(255)
+  user user?  
+  country country?
+}
