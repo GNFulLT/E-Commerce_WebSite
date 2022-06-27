@@ -13,18 +13,17 @@ datasource db {
 
 model user{
   id Int @id @default(autoincrement())
-  username String @db.VarChar(45) @unique
   email String @db.VarChar(45) @unique
   password String @db.VarChar(45)
   first_name String @db.VarChar(45)
   last_name String @db.VarChar(45)
-  created_at DateTime @db.Timestamp() @default(now())
-  updated_ad DateTime @db.Timestamp() @default(now())
+  created_at DateTime @default(now())
+  updated_ad DateTime @default(now())
   userAddress user_address?
   image_id Int @default(1)
   image image @relation(fields: [image_id],references: [id],onDelete: SetDefault,onUpdate: Cascade)
-  city_id Int
-  city city @relation(fields: [city_id],references: [id],onDelete: SetNull,onUpdate: Cascade)
+  city_id Int?
+  city city? @relation(fields: [city_id],references: [id],onDelete: SetNull,onUpdate: Cascade)
 }
 
 model user_address{
@@ -43,7 +42,7 @@ model country{
   name String @db.VarChar(255)
   short String @db.VarChar(7)
   telephone_code String @db.Char(7)
-  image_id Int @default(1)
+  image_id Int @default(2)
   image image @relation(fields: [image_id],references: [id],onDelete: NoAction,onUpdate: Cascade)
   city city[]
 }
@@ -58,9 +57,11 @@ model city{
 
 model session{
   id Int @id @default(autoincrement())
-  total Decimal @default(1)
-  created_at DateTime @db.Timestamp() @default(now())
-  updated_ad DateTime @db.Timestamp() @default(now())
+  total BigInt @default(1)
+  sessionKey String @db.Text
+  created_at DateTime
+  updated_at DateTime
+  expire_at DateTime
   user_id Int
   
 }
