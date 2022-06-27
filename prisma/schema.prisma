@@ -70,6 +70,6 @@ model image{
   id Int @id @default(autoincrement())
   src String @db.VarChar(255)
   alt String @db.VarChar(255)
-  user user?  
-  country country?
+  user user[]  
+  country country[]
 }

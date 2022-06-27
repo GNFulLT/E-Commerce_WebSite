@@ -2,14 +2,60 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import jwt from "jsonwebtoken";
 import cookieParse from "cookie-parser";
 import { getCookies, getCookie, setCookies, removeCookies, checkCookies } from 'cookies-next';
-import { CookieType } from '../../../lib/CookieType';
+import { AuthCookieKey, CookieAuthType, CookieType } from '../../../lib/types/CookieType';
 
 import { PrismaClient, user } from '@prisma/client'
+import { UpdateCreateCookie } from '../../../lib/auth';
 const prisma = new PrismaClient();
 
 
-
 export default async function ( req : NextApiRequest,res: NextApiResponse)
+{
+    const { email, password } = req.body;
+    
+    try
+    {
+        const user_db = await prisma.user.findUnique({where:{email: email}});
+        if(!user_db)
+        {
+            res.statusCode = 401;
+            res.send("Email or password is wrong");
+            return;
+        }
+        //Success login
+        if(user_db?.password.valueOf() == password.valueOf())
+        {
+            const user_data = {email:email};
+            const accessToken = jwt.sign(user_data,process.env.ACCESS_TOKEN_SECRET!,{expiresIn:"1d"});
+
+            const cookieType : CookieAuthType = {accessToken,email:email,first_name:user_db.first_name,last_name:user_db.last_name};
+            
+            console.log("createorupdate")
+            await UpdateCreateCookie(AuthCookieKey,cookieType,user_db.id,req,res);
+
+            res.statusCode = 200;
+            res.json(cookieType);
+            return;
+        }
+        else
+        {
+            res.statusCode = 401;
+            res.send("Email or password is wrong");
+            return;
+        }
+
+    }
+    catch(ex)
+    {
+        res.statusCode = 401;
+        res.send("Email or password is wrong");
+        return;
+    }
+}
+
+
+
+/*export default async function ( req : NextApiRequest,res: NextApiResponse)
 {
     let isSessionExpired = false;
     let sessionG;
@@ -147,4 +193,4 @@ export default async function ( req : NextApiRequest,res: NextApiResponse)
     }
  
     
-}   
+}   */

@@ -6,10 +6,56 @@ import {
   removeCookies,
   checkCookies,
 } from "cookies-next";
-import { CookieType } from "../../../lib/types/CookieType";
+import { AuthCookieKey, CookieAuthType } from "../../../lib/types/CookieType";
 
-import { PrismaClient, user } from "@prisma/client";
-const prisma = new PrismaClient();
+import {CheckCookieExist, ValidateCookie} from "../../../lib/auth";
+import deleteCookie from "../../../lib/auth/deleteCookie";
+
+
+export default async function (req: NextApiRequest, res: NextApiResponse) {
+
+  try
+  {
+    const isCookieExist = await CheckCookieExist(AuthCookieKey,req,res);
+    if(isCookieExist)
+    {
+      const cookie = getCookie(AuthCookieKey, {
+        req,
+        res,
+      })?.toString();
+      const endCookie: CookieAuthType = JSON.parse(cookie!);
+      console.log("exx")
+      const isCookieValid = await ValidateCookie(endCookie,endCookie.email);
+      if(isCookieValid)
+      {
+        res.json(endCookie);
+        res.status(200);
+        return;
+      }
+      else
+      {
+        deleteCookie(AuthCookieKey,req,res);
+        res.statusCode = 406;
+        res.send("Token is expired or not valid please login again");
+        return;
+      }
+    }
+    else
+    {
+      res.statusCode = 404;
+      res.send("Couldn't find token please try log in");
+      return;
+    }
+  }
+  catch(ex)
+  {
+    console.log(ex);
+    res.statusCode = 500;
+    res.send("Couldn't check token");
+    return;
+  }
+
+}
 
 /*export default async function (req: NextApiRequest, res: NextApiResponse) {
   if (checkCookies(process.env.COOKIE_TOKEN_SECRET!, { req, res })) {

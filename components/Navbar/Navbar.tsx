@@ -3,11 +3,20 @@ import styles from "./navbar.module.scss";
 import { CgMenuGridO } from "react-icons/cg";
 import { BsSearch, BsFillCartFill } from "react-icons/bs";
 import Link from 'next/link'
-
+import { useAuth } from "../../lib/hooks/Auth";
+import { FaUserCircle } from "react-icons/fa";
+import ContentLoader,{ Facebook, Instagram } from 'react-content-loader'
+import NavbarLoader from "./NavbarLoader";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 
 const Navbar = forwardRef<HTMLDivElement>((props,ref) => {
+
+  const{auth,isLoading} = useAuth();
+
   return (
+    
     <div ref={ref} className={styles["container"]}>
+     
       <ul className={styles["left-ul"]}>
         <li>
           <CgMenuGridO className={styles["left-menu-icon"]}></CgMenuGridO>
@@ -33,11 +42,12 @@ const Navbar = forwardRef<HTMLDivElement>((props,ref) => {
         </form>
       </div>
       <ul className={styles["right-ul"]}>
-        <li><Link href={"/login"}><a>Login</a></Link></li>
+        {auth ? <FaUserCircle className={styles["card"]+ " " +styles["card2"]}></FaUserCircle> : <li><Link href={"/login"}><a>Login</a></Link></li>}
         <li>
           <BsFillCartFill className={styles["card"]}></BsFillCartFill>
         </li>
       </ul>
+    
     </div>
   );
 });

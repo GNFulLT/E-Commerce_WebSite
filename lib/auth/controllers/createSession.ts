@@ -1,5 +1,4 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
-import checkSessionExist from './checkSessionExist';
+
 
 import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient();
@@ -8,11 +7,6 @@ const prisma = new PrismaClient();
 
 export default async function ( sessionKey : string ,userId : number) : Promise<boolean>
 {
-
-    const isSessionExist = await checkSessionExist(sessionKey);
-    if(isSessionExist)
-        return false;
-
     try
     {
         await prisma.session.create({data:{
