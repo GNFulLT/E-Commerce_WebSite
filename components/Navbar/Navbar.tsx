@@ -42,7 +42,7 @@ const Navbar = forwardRef<HTMLDivElement>((props,ref) => {
         </form>
       </div>
       <ul className={styles["right-ul"]}>
-        {auth ? <FaUserCircle className={styles["card"]+ " " +styles["card2"]}></FaUserCircle> : <li><Link href={"/login"}><a>Login</a></Link></li>}
+        {auth ? <Link href={"/profile"}><FaUserCircle className={styles["card"]+ " " +styles["card2"]}></FaUserCircle></Link>: <li><Link href={"/login"}><a>Login</a></Link></li>}
         <li>
           <BsFillCartFill className={styles["card"]}></BsFillCartFill>
         </li>

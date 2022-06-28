@@ -25,8 +25,9 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
       })?.toString();
       const endCookie: CookieAuthType = JSON.parse(cookie!);
       console.log("exx")
-      const isCookieValid = await ValidateCookie(endCookie,endCookie.email);
-      if(isCookieValid)
+      const {isValid,userId} = await ValidateCookie(endCookie,endCookie.email);
+      console.log(isValid);
+      if(isValid)
       {
         res.json(endCookie);
         res.status(200);

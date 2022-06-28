@@ -1,0 +1,15 @@
+.container
+{
+    background-color: black;
+    border: 3px gray solid;
+    height: 500px;
+    width: 800px;
+    @media (max-width: 1024px) 
+    {
+       transform: scale(0.8);
+    }
+    @media (max-width: 640px) {
+        transform: scale(0.7);
+
+    }
+}

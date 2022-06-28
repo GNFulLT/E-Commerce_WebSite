@@ -1,10 +1,12 @@
 import React from 'react'
 import type { NextPage } from 'next'
-
-const Profile: NextPage = () => {
+import Profile from '../components/Profile/Profile'
+const ProfilePage: NextPage = () => {
   return (
-    <div>profile</div>
+    <>
+    <Profile></Profile>
+    </>
   )
 }
 
-export default Profile;
+export default ProfilePage;
