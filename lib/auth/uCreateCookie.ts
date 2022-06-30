@@ -25,7 +25,8 @@ export default async function ( AuthCookieKey:string,cookie : CookieAuthType,use
         try{
        const session = await prisma.session.findFirst({where:{
         user_id:userId
-       }}) 
+       }});
+       console.log(session); 
         if(session)
         {
             sessionId = session.id;

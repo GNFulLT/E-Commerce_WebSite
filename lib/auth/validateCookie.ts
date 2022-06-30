@@ -29,9 +29,10 @@ export default async function(cookie:CookieAuthType,cookieEmail:string) : Promis
                 const session = await prisma.session.findFirst({where:{
                     sessionKey:cookie.accessToken
                 }});
-                
-                if(new Date(Date.now()) < session?.expire_at!)
+                console.log("session : "+session);
+                if(new Date(Date.now()) > session?.expire_at!)
                 {
+                    
                     return {isValid:false};
                 }
                 return {isValid:true,userId:user.id};

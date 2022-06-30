@@ -9,7 +9,7 @@ body {
   overflow:auto;
   margin: 0;
   padding: 0;
-  background-color: black;
+  background-color: white;
 }
 
 a {
@@ -18,6 +18,7 @@ a {
 }
 
 * {
+  margin: 0;
   box-sizing: border-box;
 }
 ::placeholder {
@@ -56,7 +57,19 @@ li {
 
 
 
+:root{
+  --sm-small-fontSize:6px;
+  --md-small-fontSize:8px;
+  --lg-small-fontSize:10px;
 
+  --sm-medium-fontSize:8px;
+  --md-medium-fontSize:13px;
+  --lg-medium-fontSize:17px;
+
+  --sm-large-fontSize:10px;
+  --md-large-fontSize:18px;
+  --lg-large-fontSize:26px;
+}
 
 
 .MuiFormHelperText-root {

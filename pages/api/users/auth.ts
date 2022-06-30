@@ -29,8 +29,8 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
       console.log(isValid);
       if(isValid)
       {
+        res.statusCode = 200;
         res.json(endCookie);
-        res.status(200);
         return;
       }
       else

@@ -11,6 +11,11 @@
   "dependencies": {
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
+    "@mantine/core": "^4.2.11",
+    "@mantine/form": "^4.2.11",
+    "@mantine/hooks": "^4.2.11",
+    "@mantine/modals": "^4.2.11",
+    "@mantine/next": "^4.2.11",
     "@mui/material": "^5.8.5",
     "@mui/system": "^5.8.5",
     "@prisma/client": "^3.15.2",
@@ -26,7 +31,9 @@
     "react-icons": "^4.4.0",
     "react-loading-skeleton": "^3.1.0",
     "react-scroll-parallax": "^3.2.0",
-    "react-spring": "^9.4.5"
+    "react-spring": "^9.4.5",
+    "react-spring-carousel": "^2.0.19",
+    "tabler-icons-react": "^1.52.0"
   },
   "devDependencies": {
     "@types/cookie-parser": "^1.4.3",

@@ -4,6 +4,8 @@
     border: 3px gray solid;
     height: 500px;
     width: 800px;
+    display: flex;
+    align-items: center;
     @media (max-width: 1024px) 
     {
        transform: scale(0.8);

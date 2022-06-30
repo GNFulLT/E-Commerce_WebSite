@@ -6,6 +6,7 @@ export default async function ( sessionKey : string ,sessionId : number) : Promi
 {
     try
     {
+        console.log(sessionKey);
         await prisma.session.update({data:{
             sessionKey:sessionKey,
             updated_at:new Date(Date.now()),

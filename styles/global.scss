@@ -1,0 +1,40 @@
+.small-text{
+    font-size: var(--sm-small-fontSize);
+@media screen and (min-width: 768px) 
+{
+ font-size: var(--md-small-fontSize);
+}
+@media screen and (min-width: 1024px) 
+{
+ font-size: var(--lg-small-fontSize);
+}
+}
+
+.large-text{
+    font-size: var(--sm-large-fontSize);
+@media screen and (min-width: 768px) 
+{
+ font-size: var(--md-large-fontSize);
+}
+@media screen and (min-width: 1024px) 
+{
+ font-size: var(--lg-large-fontSize);
+}
+}
+
+.medium-text{
+    white-space: pre-wrap;
+    font-size: var(--sm-medium-fontSize);
+@media screen and (min-width: 768px) 
+{
+ font-size: var(--md-medium-fontSize);
+}
+@media screen and (min-width: 1024px) 
+{
+ font-size: var(--lg-medium-fontSize);
+}
+}
+.cursor-text
+{
+    cursor: pointer;
+}
