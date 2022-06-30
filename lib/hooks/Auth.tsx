@@ -56,7 +56,17 @@ const AuthProvider : React.FC<any> = ({children}) =>
     const signOut = async () => {
         
     } 
-    
+
+    if(isLoading)
+    {
+        console.log("Daha Yüklenmedi")
+        return (
+            <AuthContext.Provider value={{auth,signIn,signOut,isLoading}}>
+        
+            </AuthContext.Provider>
+        )
+    }
+    console.log("Şimdi yüklendi")
     return(
         <AuthContext.Provider value={{auth,signIn,signOut,isLoading}}>
         {children}

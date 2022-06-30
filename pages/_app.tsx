@@ -3,17 +3,28 @@ import type { AppProps } from 'next/app'
 import InfoBar from "../components/CPS/Infobar/InfoBar";
 import { useState } from 'react';
 import { ParallaxProvider } from 'react-scroll-parallax';
-import AuthProvider from '../lib/hooks/Auth';
+import AuthProvider, { useAuth } from '../lib/hooks/Auth';
 import "../styles/global.scss"
 import Navbar from '../components/CPS/Navbar/Navbar';
 import Footer from '../components/CPS/Footer/Footer';
+import { MantineProvider } from '@mantine/core';
 
 function MyApp({ Component, pageProps }: AppProps) {
+  
   return (
     <AuthProvider>
       <ParallaxProvider>
         <InfoBar></InfoBar>
+        <MantineProvider
+        withGlobalStyles
+        withNormalizeCSS
+        theme={{
+          /** Put your mantine theme override here */
+          colorScheme: 'light',
+        }}
+      >
         <Component {...pageProps} />
+        </MantineProvider>
         <Footer></Footer>
      </ParallaxProvider>
     </AuthProvider>

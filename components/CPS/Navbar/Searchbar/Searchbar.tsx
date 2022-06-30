@@ -5,8 +5,8 @@ import { useMediaQuery } from '@mantine/hooks';
 
 export default function InputWithButton(props: TextInputProps) {
   const theme = useMantineTheme();
-  const query = useMediaQuery("(min-width: 1024px)");
-  const query2 = useMediaQuery("(min-width: 768px)");
+  const query = useMediaQuery("(min-width: 1024px)",false);
+  const query2 = useMediaQuery("(min-width: 768px)",false);
 
   let width = "120px";
   if(query2)
