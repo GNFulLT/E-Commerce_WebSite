@@ -1,0 +1,125 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-py"
+  interface = "sync"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+
+model user{
+  id Int @id @default(autoincrement())
+  email String @db.VarChar(45) @unique
+  password String @db.VarChar(45)
+  first_name String @db.VarChar(45)
+  last_name String @db.VarChar(45)
+  created_at DateTime @default(now())
+  updated_ad DateTime @default(now())
+  userAddress user_address?
+  image_id Int @default(1)
+  image image @relation(fields: [image_id],references: [id],onDelete: SetDefault,onUpdate: Cascade)
+  city_id Int?
+  city city? @relation(fields: [city_id],references: [id],onDelete: SetNull,onUpdate: Cascade)
+}
+
+model user_address{
+  id Int @id @default(autoincrement())
+  address_line1 String? @db.Text
+  address_line2 String? @db.Text
+  postal_code String? @db.VarChar(45)
+  telephone1 String? @db.VarChar(17)
+  telephone2 String? @db.VarChar(17)
+  user_id Int @unique
+  user user @relation(fields: [user_id],references: [id],onDelete: Cascade,onUpdate: Cascade) 
+}
+
+model country{
+  id Int @id @default(autoincrement())
+  name String @db.VarChar(255)
+  short String @db.VarChar(7)
+  telephone_code String @db.Char(7)
+  image_id Int @default(2)
+  image image @relation(fields: [image_id],references: [id],onDelete: NoAction,onUpdate: Cascade)
+  citys city[]
+}
+
+model city{
+  id Int @id @default(autoincrement())
+  name String @db.VarChar(255)
+  country_id Int
+  country country @relation(fields: [country_id],references: [id],onDelete: Cascade,onUpdate: Cascade)
+  users user[]
+}
+
+model session{
+  id Int @id @default(autoincrement())
+  total BigInt @default(1)
+  sessionKey String @db.Text
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
+  expire_at DateTime
+  user_id Int
+  
+}
+
+model image{
+  id Int @id @default(autoincrement())
+  src String @db.VarChar(255)
+  alt String @db.VarChar(255)
+  users user[]  
+  countries country[]
+  products product[]
+}
+
+model product_category{
+  id Int @id @default(autoincrement())
+  name String @db.VarChar(45)
+  desc String @db.VarChar(45)
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
+  products product[]
+
+}
+
+model product_inventory{
+  id Int @id @default(autoincrement())
+  quantity Int @default(0)
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
+  product product?
+}
+
+model product_discount{
+  id Int @id @default(autoincrement())
+  name String @db.VarChar(45)
+  desc String @db.VarChar(255)
+  active Boolean
+  discount_percent Float
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
+  products product[]
+}
+
+model product{
+  id Int @id @default(autoincrement())
+  name String @db.VarChar(255)
+  desc String @db.Text
+  SKU String @db.VarChar(255) @default("")
+  price Int
+  totalSell Int @default(0)
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
+  category_id Int
+  product_category product_category @relation(fields: [category_id],references: [id],onDelete: Restrict,onUpdate: Cascade)
+  inventory_id Int @unique
+  inventory product_inventory @relation(fields: [inventory_id],references: [id],onDelete: Cascade,onUpdate: Cascade)
+  discount_id Int? 
+  discount product_discount? @relation(fields: [discount_id],references: [id],onDelete: SetNull,onUpdate: Cascade)
+  image_id Int @default(2)
+  image image @relation(fields: [image_id],references: [id],onDelete: SetDefault,onUpdate: Cascade)
+}

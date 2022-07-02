@@ -1,4 +1,0 @@
-type Category{
-    id:Int
-    categoryName:String
-}
