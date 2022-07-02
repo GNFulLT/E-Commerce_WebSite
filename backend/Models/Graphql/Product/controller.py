@@ -9,8 +9,8 @@ db = Prisma()
 def getPopularProducts(limit:int):
     try:
         db.connect()
-        if(limit > 10):
-            limit = 10
+        if(limit > 12):
+            limit = 12
         products = db.product.find_many(take=limit,order={
             'totalSell' : 'desc'
         })

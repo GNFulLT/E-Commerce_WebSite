@@ -3,10 +3,12 @@ import styles from "./product.module.scss";
 import { ProductResponseType } from "../../../lib/types/ProductType";
 import {Button} from "@mantine/core"
 import { useMediaQuery } from "@mantine/hooks";
+import { Loader } from '@mantine/core';
+import { Code } from 'react-content-loader'
 
 interface ProductProps
 {
-    product:ProductResponseType
+    product?:ProductResponseType
 }
 
 const Product = ({product}:ProductProps) => {
@@ -14,19 +16,20 @@ const Product = ({product}:ProductProps) => {
 
     
   return (
+    
     <div className={styles["container"]}>
-      <img src={product.imageSrc} alt={product.imageAlt} className={styles["card_image"]}/>
+      {product ? <img src={product.imageSrc} alt={product.imageAlt} className={styles["card_image"]}/> : <Loader  variant="dots" className={`${styles["card_image"]} ${styles["loader"]}`} color="indigo" size="sm" />}
       <div className={`small-text ${styles["stock-code"]}`}>
-        {product.SKU}
+        {product ? product.SKU : <Code style={{transform:"scale(0.8)"}} />}
       </div>
       <div className={styles["product_info"]}>
-        <div className={`${styles["productName"]}`}>
+        {product ? <div className={`${styles["productName"]}`}>
           {product.name}
-        </div>
+        </div> : <></>}
         <div className={styles["product_price_info"]}>
-          <div className={`medium-text ${styles["price"]}`}>
-            <span className="large-text">{product.price}</span><span style={{color:"#66ff00"}}>$</span>
-          </div>
+           {product ? <div className={`medium-text ${styles["price"]}`}>
+           <span className="large-text">{product.price}</span><span style={{color:"#66ff00"}}>$</span> 
+          </div> : <></>}
         <Button styles={{
                 root: {
                   width: `${query ? "180px" : "90px"}`,
@@ -35,7 +38,8 @@ const Product = ({product}:ProductProps) => {
                   ":hover":{
                     opacity:0.8,
                     transition:"all 0.4s"
-                  }
+                  },
+                  margin:`${product ? "0" : "50px 0 0 0"}`
                 },
                 
                 label: {

@@ -9,7 +9,7 @@ import { FcLike } from "react-icons/fc"
 
 const GQuery = `
 {
-    getPopularProducts(limit: 10) {
+    getPopularProducts(limit: 12) {
         name
         price
         stockAmount
@@ -25,24 +25,18 @@ const fetcher = (query: any) => {
     return request(BACKEND_URL, query);
   };
 
+  const empty = [1,2,3,4,5,6,7,8,9,10,11,12]
+
 const ProductsShowcase = () => {
     const { data, error } = useSWR<{getPopularProducts:ProductResponseType[]},any>(GQuery, fetcher,{revalidateOnFocus:false,revalidateOnReconnect:false});
 
-    if(!data)
-    {
-        return (
-            <div className={styles["container"]}>
-        
-            </div>
-          )
-    }
   return (
     <div className={styles["max-container"]}>
         <div className={styles["featured-container"]}>
            <FcLike className={styles["icon"]}></FcLike><span className='large-text'> Most Featured Products</span>
         </div>
         <div className={styles["container"]}>
-            {data.getPopularProducts.map(p => <Product key={p.id} product={p}></Product>)}
+            {data ? data.getPopularProducts.map(p => <Product key={p.id} product={p}></Product>) : empty.map((e) => <Product key={e}></Product>)}
         </div>
     </div>
   )
