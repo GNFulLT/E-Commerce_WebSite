@@ -3,15 +3,11 @@ from fastapi import FastAPI
 from strawberry.asgi import GraphQL
 from prisma import Prisma
 from Models.Graphql.Product.schema import Query as ProductQuery
-from Graphql.user import User
 from fastapi.middleware.cors import CORSMiddleware
 
 
 @strawberry.type
 class Query(ProductQuery):
-    @strawberry.field
-    def user(self) -> User:
-        return User(name="Patrick", age=100)
     pass
 
 
