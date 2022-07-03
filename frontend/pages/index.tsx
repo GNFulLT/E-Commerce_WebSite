@@ -9,6 +9,7 @@ import { Parallax } from 'react-scroll-parallax';
 import HomeCarousel from '../components/CPS/HomeCarousel/HomeCarousel';
 import HomeNav from '../components/CPS/HomeNav/HomeNav';
 import ProductsShowcase from '../components/CPS/ProductsShowcase/ProductsShowcase';
+import MarkCarousel from '../components/CPS/MarkCarousel/MarkCarousel';
 
 const Home: NextPage = () => {
 
@@ -18,6 +19,7 @@ const Home: NextPage = () => {
       <HomeNav></HomeNav>
       <HomeCarousel></HomeCarousel>
       <ProductsShowcase></ProductsShowcase>
+      <MarkCarousel></MarkCarousel>
     </>
   )
 }
