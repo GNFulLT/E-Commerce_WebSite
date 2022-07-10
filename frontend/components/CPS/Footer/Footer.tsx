@@ -18,6 +18,10 @@ import {
 } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 
+const categories=[{name:"Television"},{name:"Mobilephone"},{name:"Laptop"},{name:"Desktop"},{name:"Motherboard"}]
+const categories2=[{name:"Graphics Card"},{name:"Processor"},{name:"Tablet"},{name:"Hard Disk"}]
+const customerS = [{name:"Shippings"},{name:"Refund & Cancellation"},{name:"Payment & Installment"},{name:"Shipping Tracking"}]
+
 const Footer = () => {
     
   const query = useMediaQuery("(min-width: 768px)",true);
@@ -39,7 +43,29 @@ const Footer = () => {
 
   return (
     <div className={styles["container"]}>
-      <div className={styles["category-list"]}></div>
+      <div className={styles["category-list"]}>
+        <div className={styles["categories"]}>
+            <div className="large-text">Categories</div> 
+              <div className={styles["list"]}>
+              <ul>
+                {categories.map((val,i) =>  <li className="cursor-text" key={i}><div className="medium-text">{val.name}</div></li>)}
+              </ul>
+              <ul>
+                {categories2.map((val,i) =>  <li className="cursor-text" key={i}><div className="medium-text">{val.name}</div></li>)}
+              </ul>
+              </div>
+        </div>
+        <div className={styles["categories"]}>
+            <div className="large-text">Customer Service</div> 
+              <div className={styles["list"]}>
+              <ul>
+                {customerS.map((val,i) =>  <li className="cursor-text" key={i}><div className="medium-text">{val.name}</div></li>)}
+              </ul>
+        
+              </div>
+        </div>
+        
+      </div>
       <div className={styles["subscribe"]}>
         <div className={styles["icon-list"]}>
           <div className="medium-text" style={{ textAlign: "center" }}>

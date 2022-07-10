@@ -58,7 +58,7 @@ const P404: NextPage =  () =>  {
 
   return (
     <>
-    <Container className={classes.root}>
+   <Container className={classes.root}>
       <div className={classes.inner}>
         <Illustration className={classes.image} />
         <div className={classes.content}>
@@ -68,7 +68,7 @@ const P404: NextPage =  () =>  {
             page has been moved to another URL. If you think this is an error contact support.
           </Text>
           <Group position="center">
-            <Button onClick={() => Router.push("/")} size="md">Take me back to home page</Button>
+            <Button size="md">Take me back to home page</Button>
           </Group>
         </div>
       </div>

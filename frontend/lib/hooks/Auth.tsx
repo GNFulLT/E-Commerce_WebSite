@@ -54,7 +54,15 @@ const AuthProvider : React.FC<any> = ({children}) =>
     } 
 
     const signOut = async () => {
-        
+        const res = await axios.post("/api/users/logout");
+        if(res.status == 200)
+        {
+            setAuth(undefined);
+        }
+        else
+        {
+            throw "Cant Logout";
+        }
     } 
 
     if(isLoading)

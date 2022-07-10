@@ -23,8 +23,6 @@ def getPopularProducts(limit:int):
         return None;
 
 def createGProductFromProduct(product:prisma.client.models.product):
-     print("Hello this is product : ");
-     print(product.image_id);
      discount = 0;
      if(product.discount != None):
         discount = product.discount.discount_percent;

@@ -9,11 +9,13 @@ import Navbar from '../components/CPS/Navbar/Navbar';
 import Footer from '../components/CPS/Footer/Footer';
 import { MantineProvider } from '@mantine/core';
 import { useAPI } from '../lib/hooks/API';
+import QueryActiveProvider from '../lib/hooks/Query';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <AuthProvider>
       <ParallaxProvider>
+      <QueryActiveProvider>
         <InfoBar></InfoBar>
         <MantineProvider
         withGlobalStyles
@@ -25,6 +27,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Component {...pageProps} />
         </MantineProvider>
         <Footer></Footer>
+      </QueryActiveProvider>
      </ParallaxProvider>
     </AuthProvider>
   )

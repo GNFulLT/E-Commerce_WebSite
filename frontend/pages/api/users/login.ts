@@ -5,7 +5,10 @@ import { getCookies, getCookie, setCookies, removeCookies, checkCookies } from '
 import { AuthCookieKey, CookieAuthType, CookieType } from '../../../lib/types/CookieType';
 
 import { PrismaClient, user } from '@prisma/client'
-import { UpdateCreateCookie } from '../../../lib/auth';
+import { CheckCookieExist, UpdateCreateCookie } from '../../../lib/auth';
+import axios from 'axios';
+import { BACKEND_LOGIN } from '../../../constants';
+import deleteCookie from '../../../lib/auth/deleteCookie';
 const prisma = new PrismaClient();
 
 
@@ -15,38 +18,35 @@ export default async function ( req : NextApiRequest,res: NextApiResponse)
     
     try
     {
-        const user_db = await prisma.user.findUnique({where:{email: email}});
-        if(!user_db)
+        
+        const user_data = {email:email};
+        const accessToken = jwt.sign(user_data,process.env.ACCESS_TOKEN_SECRET!,{expiresIn:"1d"});
+        const loginRes = await axios.get(BACKEND_LOGIN,{params:{
+            email,
+            password,
+            sessionKey:accessToken,
+        }})
+        if(!(loginRes.data))
         {
             res.statusCode = 401;
             res.send("Email or password is wrong");
             return;
         }
-        //Success login
-        if(user_db?.password.valueOf() == password.valueOf())
-        {
-            const user_data = {email:email};
-            const accessToken = jwt.sign(user_data,process.env.ACCESS_TOKEN_SECRET!,{expiresIn:"1d"});
+        const cookieType : CookieAuthType = loginRes.data as CookieAuthType;
+        const isCookieExist = await CheckCookieExist(AuthCookieKey,req,res);
+        if(isCookieExist)
+            deleteCookie(AuthCookieKey,req,res);
 
-            const cookieType : CookieAuthType = {accessToken,email:email,first_name:user_db.first_name,last_name:user_db.last_name};
-            
-            console.log("createorupdate")
-            await UpdateCreateCookie(AuthCookieKey,cookieType,user_db.id,req,res);
-
-            res.statusCode = 200;
-            res.json(cookieType);
-            return;
-        }
-        else
-        {
-            res.statusCode = 401;
-            res.send("Email or password is wrong");
-            return;
-        }
+        setCookies(AuthCookieKey,JSON.stringify(cookieType),{req,res,maxAge:60*60*24});
+        
+        res.statusCode = 200;
+        res.json(cookieType);
+        return;
 
     }
     catch(ex)
     {
+        console.log(ex)
         res.statusCode = 401;
         res.send("Email or password is wrong");
         return;

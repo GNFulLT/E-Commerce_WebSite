@@ -13,7 +13,7 @@ const HomeNav = () => {
                 
                 <li><RiComputerLine className={styles["icon"]}></RiComputerLine><div className='medium-text'>TV</div></li>
                 <li><BsLaptop className={styles["icon"]}></BsLaptop><div className='medium-text'>Laptop</div></li>
-                <li><MdPhoneIphone className={styles["icon"]}></MdPhoneIphone><div className='medium-text'>Telephone</div></li>
+                <li><MdPhoneIphone className={styles["icon"]}></MdPhoneIphone><div className='medium-text'>Mobilephone</div></li>
 
             </ul>
         </div>

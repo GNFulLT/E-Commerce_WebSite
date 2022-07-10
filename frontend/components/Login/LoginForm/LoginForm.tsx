@@ -35,10 +35,6 @@ const LoginForm =  forwardRef<HTMLDivElement>((props,ref) => {
         setHelperText("");
       },2000)
     })
-      
-      
-    
-    
   }
 
   return (

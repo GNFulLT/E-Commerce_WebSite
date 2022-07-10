@@ -10,13 +10,16 @@ import { AuthCookieKey, CookieAuthType } from "../../../lib/types/CookieType";
 
 import {CheckCookieExist, ValidateCookie} from "../../../lib/auth";
 import deleteCookie from "../../../lib/auth/deleteCookie";
+import {BACKEND_AUTH} from "../../../constants"
+import axios from "axios";
 
 
 export default async function (req: NextApiRequest, res: NextApiResponse) {
-
+  let cookieExs = false;
   try
   {
     const isCookieExist = await CheckCookieExist(AuthCookieKey,req,res);
+    cookieExs = isCookieExist;
     if(isCookieExist)
     {
       const cookie = getCookie(AuthCookieKey, {
@@ -24,8 +27,38 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
         res,
       })?.toString();
       const endCookie: CookieAuthType = JSON.parse(cookie!);
-      console.log("exx")
-      const {isValid,userId} = await ValidateCookie(endCookie,endCookie.email);
+      const authRes = await axios.get(BACKEND_AUTH,{params:{
+        sessionKey:endCookie.accessToken,
+        email:endCookie.email
+      }})
+      if(authRes.data == null)
+      {
+        deleteCookie(AuthCookieKey,req,res);
+        res.statusCode = 406;
+        res.send("Token is expired or not valid please login again");
+        return;
+      }
+      else
+      {
+        res.statusCode = 200;
+        res.json(endCookie);
+        return;
+      }
+    }
+    else
+    {
+      res.statusCode = 404;
+      res.send("Couldn't find token please try log in");
+      return;
+    }
+  }
+  catch(ex)
+  {
+    res.statusCode = 500;
+    res.send("Couldn't check token");
+    return;
+  }
+     /* const {isValid,userId} = await ValidateCookie(endCookie,endCookie.email);
       console.log(isValid);
       if(isValid)
       {
@@ -54,7 +87,7 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
     res.statusCode = 500;
     res.send("Couldn't check token");
     return;
-  }
+  }*/
 
 }
 
