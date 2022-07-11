@@ -15,8 +15,6 @@ const Home: NextPage = () => {
 
   return (
     <>
-      <Navbar></Navbar>
-      <HomeNav></HomeNav>
       <HomeCarousel></HomeCarousel>
       <ProductsShowcase></ProductsShowcase>
       <MarkCarousel></MarkCarousel>

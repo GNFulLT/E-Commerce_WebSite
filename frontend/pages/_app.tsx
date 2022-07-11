@@ -10,6 +10,7 @@ import Footer from '../components/CPS/Footer/Footer';
 import { MantineProvider } from '@mantine/core';
 import { useAPI } from '../lib/hooks/API';
 import QueryActiveProvider from '../lib/hooks/Query';
+import HomeNav from '../components/CPS/HomeNav/HomeNav';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -24,6 +25,8 @@ function MyApp({ Component, pageProps }: AppProps) {
           colorScheme: 'light',
         }}
       >
+        <Navbar></Navbar>
+        <HomeNav></HomeNav>
         <Component {...pageProps} />
         </MantineProvider>
         <Footer></Footer>

@@ -5,6 +5,7 @@ import {Button} from "@mantine/core"
 import { useMediaQuery } from "@mantine/hooks";
 import { Loader } from '@mantine/core';
 import { Code } from 'react-content-loader'
+import { useMdQuery } from "../../../lib/hooks/Query";
 
 interface ProductProps
 {
@@ -12,7 +13,7 @@ interface ProductProps
 }
 
 const Product = ({product}:ProductProps) => {
-  const query = useMediaQuery("(min-width: 768px)",false);
+  const {mdQuery} = useMdQuery();
 
     
   return (
@@ -32,8 +33,8 @@ const Product = ({product}:ProductProps) => {
           </div> : <></>}
         <Button styles={{
                 root: {
-                  width: `${query ? "180px" : "90px"}`,
-                  height: `${query ? "30px" : "15px"}`,
+                  width: `${mdQuery ? "180px" : "90px"}`,
+                  height: `${mdQuery ? "30px" : "15px"}`,
                   transition:"all 0.2s",
                   ":hover":{
                     opacity:0.8,
@@ -43,7 +44,7 @@ const Product = ({product}:ProductProps) => {
                 },
                 
                 label: {
-                  fontSize: `${query ? "14px" : "7px"}`,
+                  fontSize: `${mdQuery ? "14px" : "7px"}`,
                   padding: "0 75px 0 0",
                 },
               }} radius="xs" size="xs">Go to view the product</Button>
