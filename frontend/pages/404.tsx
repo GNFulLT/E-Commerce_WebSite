@@ -1,7 +1,7 @@
 import React from 'react';
 import { createStyles, Container, Title, Text, Button, Group } from '@mantine/core';
 import { NextPage } from 'next';
-import { Illustration } from '../components/CPS/P404/Illustration';
+import { Illustration } from '../components/P404/Illustration';
 import Router from 'next/router';
 
 const useStyles = createStyles((theme) => ({

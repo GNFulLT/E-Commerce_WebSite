@@ -1,11 +1,11 @@
 import React from "react";
 import styles from "./product.module.scss";
-import { ProductResponseType } from "../../../lib/types/ProductType";
+import { ProductResponseType } from "../../lib/types/ProductType";
 import {Button} from "@mantine/core"
 import { useMediaQuery } from "@mantine/hooks";
 import { Loader } from '@mantine/core';
 import { Code } from 'react-content-loader'
-import { useMdQuery } from "../../../lib/hooks/Query";
+import { useMdQuery } from "../../lib/hooks/Query";
 
 interface ProductProps
 {

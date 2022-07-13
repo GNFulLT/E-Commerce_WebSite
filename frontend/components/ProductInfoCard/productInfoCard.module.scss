@@ -1,0 +1,54 @@
+.container
+{
+            height: 100%;
+            width: 100%;
+            display: block;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            background-color: #F5F5F5;
+            gap: 10px;
+            
+            & > div
+            {
+                padding: 0 5px;
+            }
+            & > .price
+            {
+                display: flex;
+                flex-direction: row;
+                gap: 4px;
+                align-items: baseline;
+                justify-content: flex-start;
+
+            }
+            & > .detail-top
+            {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+                width: 100%;
+                background-color: #228BE6;
+                
+                & > ul
+                {
+                    display: flex;
+                    flex-direction: row;
+                    padding: 0;
+                    gap: 3px;
+                    & > li 
+                    {
+                        & > .icon
+                        {
+                            width: 7px;
+                            color: rgba(233, 54, 40, .4);
+                        }
+                        & > .checked
+                        {
+                            color:#ff0000
+                        }
+                    }
+                }
+            }
+}

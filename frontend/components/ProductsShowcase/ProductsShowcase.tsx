@@ -2,8 +2,8 @@ import React from 'react'
 import styles from "./productsShowCase.module.scss"
 import useSWR from "swr";
 import { request } from "graphql-request";
-import {BACKEND_URL} from "../../../constants"
-import { ProductResponseType } from '../../../lib/types/ProductType';
+import {BACKEND_URL} from "../../constants"
+import { ProductResponseType } from '../../lib/types/ProductType';
 import Product from '../Product/Product';
 import { FcLike } from "react-icons/fc"
 

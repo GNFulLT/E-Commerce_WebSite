@@ -2,8 +2,8 @@ import React, { useRef, useState } from 'react'
 import { PasswordInput, Text, Group, TextInput, Anchor } from '@mantine/core';
 import { Button } from '@mantine/core';
 import styles from "./login.module.scss"
-import { useMdQuery } from '../../../../lib/hooks/Query';
-import { useAuth } from '../../../../lib/hooks/Auth';
+import { useMdQuery } from '../../../lib/hooks/Query';
+import { useAuth } from '../../../lib/hooks/Auth';
 import Router from 'next/router';
 import { createTheme, LinearProgress, ThemeProvider } from '@mui/material';
 

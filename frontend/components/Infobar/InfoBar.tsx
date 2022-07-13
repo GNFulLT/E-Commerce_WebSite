@@ -5,7 +5,7 @@ import { MdOutlineContactSupport } from "react-icons/md"
 import { GoLocation,GoHome } from "react-icons/go";
 import { BiUser,BiUserCircle } from "react-icons/bi";
 import LoginCard from '../LoginRegister/LoginCard';
-import { useAuth } from '../../../lib/hooks/Auth';
+import { useAuth } from '../../lib/hooks/Auth';
 import {FiLogOut} from "react-icons/fi"
 import {CgProfile} from "react-icons/cg"
 const InfoBar = () => {

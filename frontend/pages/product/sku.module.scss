@@ -1,0 +1,13 @@
+.container
+{
+    display: grid;
+    grid-template-columns: repeat(2,calc(50% - 2.5px));
+    grid-column-gap:5px;
+    & > img
+    {
+        grid-column: 1;
+        object-fit: cover;
+        max-height: 100%;
+        max-width: 100%;
+    }
+}

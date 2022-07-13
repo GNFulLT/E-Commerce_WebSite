@@ -4,7 +4,7 @@ import { PasswordInput, Text, Group, TextInput,  Box, Progress,Center } from '@m
 import { Button } from '@mantine/core';
 import { Check, X } from 'tabler-icons-react';
 import { useInputState } from '@mantine/hooks';
-import { useMdQuery } from '../../../../lib/hooks/Query';
+import { useMdQuery } from '../../../lib/hooks/Query';
 
 const requirements = [
     { re: /[0-9]/, label: 'Includes number' },

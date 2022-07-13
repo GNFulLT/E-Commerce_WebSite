@@ -1,20 +1,48 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/router'
-import styles from "./skt.module.scss"
+import styles from "./sku.module.scss"
 import {BsFillSuitHeartFill, BsHandbag,BsBookmarkHeart,BsShare} from "react-icons/bs"
 import { useMdQuery } from '../../lib/hooks/Query'
 import { Button } from '@mantine/core'
-const SKT = () => {
+import MarkCarousel from '../../components/MarkCarousel/MarkCarousel'
+import { useSpringCarousel } from 'react-spring-carousel'
+import MarkCard from '../../components/MarkCarousel/MarkCard/MarkCard'
+import ProductInfoCard from '../../components/ProductInfoCard/ProductInfoCard'
+import {ProductResponseType} from "../../lib/types/ProductType"
+
+const SKU = () => {
     const router = useRouter()
-    const { skt,commentPage } = router.query
+    const { sku,commentPage } = router.query
     const star = 3.4;
-    const { mdQuery } = useMdQuery();
-    const [heart1Checked,setHeart1Checked] = useState(false);
+    useEffect(() => {
+      router.push(`/product/${sku}?commentPage=2`,undefined,{shallow:true});
+
+    },[])
+
+    let pc:ProductResponseType = {
+      id:1,
+      SKU:sku?.toString()!,
+      name:"Oppo A55 4+128gb Akıllı Telefon Işıltılı Siyah",
+      imageAlt:"image",
+      imageSrc:"/images/product/default.jpg",
+      desc:"qweqwebqwebqwebqwen qwenqwe nqwneqwenqwebqwec qwev qwrqerewvr ewtberw nretnewr",
+      discPercent:0,
+      price:400,
+      stockAmount:400
+    } 
+    return (
+      <div className={styles["container"]}>
+        <img src="/images/product/default.jpg" alt="" />
+        <ProductInfoCard star={3.5} product={pc}></ProductInfoCard>
+      </div>
+    );
+    /*const [heart1Checked,setHeart1Checked] = useState(false);
     const [heart2Checked,setHeart2Checked] = useState(false);
     const [heart3Checked,setHeart3Checked] = useState(false);
     const [heart4Checked,setHeart4Checked] = useState(false);
     const [heart5Checked,setHeart5Checked] = useState(false);
-
+  
+  
     const heartArr = [setHeart1Checked,setHeart2Checked,setHeart3Checked,setHeart4Checked,setHeart5Checked]
     useEffect(() => {
         router.push(`/product/${skt}?commentPage=2`,undefined,{shallow:true});
@@ -31,7 +59,9 @@ const SKT = () => {
         <div className={styles["top-side"]}>
             <div className={styles["images"]}>
                 <img className={styles["image"]} src="/images/product/default.jpg" alt="image" />
-                <div>sa</div>
+                <div className={styles["carousel"]}>
+                  
+                </div>
             </div>
             <div className={styles["details"]}>
                 <div className={styles["detail-top"]}>
@@ -106,7 +136,7 @@ const SKT = () => {
             </div>
         </div>
     </div>  
-  )
+  )*/
 }
 
-export default SKT
+export default SKU
