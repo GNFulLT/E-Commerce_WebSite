@@ -9,7 +9,6 @@ interface LoginCardProps
     onClose:() => any
     isShow:boolean
 }
-
 const LoginCard = ({onClose,isShow}:LoginCardProps) => {
     const spanRef = useRef<HTMLSpanElement>(null);
     const cardRef = useRef<HTMLDivElement>(null);

@@ -9,6 +9,7 @@ import { useSpringCarousel } from 'react-spring-carousel'
 import MarkCard from '../../components/MarkCarousel/MarkCard/MarkCard'
 import ProductInfoCard from '../../components/ProductInfoCard/ProductInfoCard'
 import {ProductResponseType} from "../../lib/types/ProductType"
+import Comments from '../../components/Comments/Comments'
 
 const SKU = () => {
     const router = useRouter()
@@ -34,6 +35,9 @@ const SKU = () => {
       <div className={styles["container"]}>
         <img src="/images/product/default.jpg" alt="" />
         <ProductInfoCard star={3.5} product={pc}></ProductInfoCard>
+        <div className={styles["comments"]}>
+          <Comments></Comments>
+        </div>
       </div>
     );
     /*const [heart1Checked,setHeart1Checked] = useState(false);

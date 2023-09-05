@@ -1,13 +1,24 @@
 .container
 {
     display: grid;
-    grid-template-columns: repeat(2,calc(50% - 2.5px));
+    grid-template-columns: repeat(2,calc(50% - 10px));
     grid-column-gap:5px;
+    height: auto;
+    align-items: center;
+    justify-content: center;
+    @media (min-width:768px) {
+        grid-template-columns: repeat(2,calc(50% - 20px));
+    }
     & > img
     {
         grid-column: 1;
         object-fit: cover;
         max-height: 100%;
         max-width: 100%;
+    }
+    & > .comments
+    {
+        grid-column-start: 1;
+        grid-column-end: 3;
     }
 }

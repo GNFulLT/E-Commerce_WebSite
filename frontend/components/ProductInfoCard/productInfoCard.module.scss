@@ -1,6 +1,6 @@
 .container
 {
-            height: 100%;
+            max-height: 100%;
             width: 100%;
             display: block;
             display: flex;
@@ -8,10 +8,26 @@
             justify-content: flex-start;
             background-color: #F5F5F5;
             gap: 10px;
-            
+            padding-bottom: 20px;
             & > div
             {
                 padding: 0 5px;
+            }
+            & > .buttons
+            {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                gap: 5px;
+                &  .btninside
+                {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    align-items: baseline;
+                    gap: 2px;
+                }
             }
             & > .price
             {

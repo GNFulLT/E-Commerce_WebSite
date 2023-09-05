@@ -3,6 +3,9 @@ import React, { useEffect, useState } from 'react'
 import { BsFillSuitHeartFill } from 'react-icons/bs'
 import styles from "./productInfoCard.module.scss"
 import {ProductResponseType} from "../../lib/types/ProductType"
+import { Button } from '@mantine/core'
+import { useMdQuery } from '../../lib/hooks/Query'
+import { BsTelephone,BsSuitHeart,BsHandbag ,BsBookmarkHeart,BsShare} from "react-icons/bs";
 
 interface ProductInfoCardProps
 {
@@ -28,7 +31,7 @@ const ProductInfoCard = ({star,product}:ProductInfoCardProps) => {
             heartArr[i](true);
     },[])
 
-
+    const {mdQuery} = useMdQuery();
   return (
     <div className={styles["container"]}>
         <div className={styles["detail-top"]}>
@@ -50,6 +53,61 @@ const ProductInfoCard = ({star,product}:ProductInfoCardProps) => {
         <div className={styles["price"]}>
             <span  className='large-text'><span style={{color:"green"}}>$</span>{product.price}</span><span className='medium-text'>USD</span>
         </div>
+        <div className={styles["buttons"]}>
+        <Button styles={{
+                root: {
+                  width: `${mdQuery ? "180px" : "90px"}`,
+                  height: `${mdQuery ? "30px" : "15px"}`,
+                  transition:"all 0.2s",
+                  ":hover":{
+                    opacity:0.8,
+                    transition:"all 0.4s"
+                  },
+                  margin:`${product ? "0" : "50px 0 0 0"}`
+                },
+                
+                label: {
+                  fontSize: `${mdQuery ? "14px" : "7px"}`,
+                },
+              }} radius="xs" size="xs"><div className={styles["btninside"]}><BsHandbag></BsHandbag>Add to the card</div></Button>        
+                  
+                <Button styles={{
+                root: {
+                  width: `${mdQuery ? "30px" : "30px"}`,
+                  height: `${mdQuery ? "30px" : "15px"}`,
+                  transition:"all 0.2s",
+                  ":hover":{
+                    opacity:0.8,
+                    transition:"all 0.4s"
+                  },
+                  margin:`${product ? "0" : "50px 0 0 0"}`
+                },
+                
+                label: {
+                    fontSize: `${mdQuery ? "14px" : "10px"}`,
+                    padding:"0 12px 0 0"
+                },
+              }} radius="xs" size="xs"><div className={styles["btninside"]}><BsBookmarkHeart style={{color:"red"}}></BsBookmarkHeart></div></Button>        
+                
+                <Button styles={{
+                root: {
+                  width: `${mdQuery ? "30px" : "30px"}`,
+                  height: `${mdQuery ? "30px" : "15px"}`,
+                  transition:"all 0.2s",
+                  ":hover":{
+                    opacity:0.8,
+                    transition:"all 0.4s"
+                  },
+                  margin:`${product ? "0" : "50px 0 0 0"}`
+                },
+                
+                label: {
+                    fontSize: `${mdQuery ? "14px" : "10px"}`,
+                    padding:"0 12px 0 0"
+                },
+              }} radius="xs" size="xs"><div className={styles["btninside"]}><BsShare style={{color:"blue"}}></BsShare></div></Button>        
+               
+              </div>
     </div>
   )
 }
